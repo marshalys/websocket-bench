@@ -10,7 +10,7 @@ program
   .version('0.0.3')
   .usage('[options] <server>')
   .option('-a, --amount <n>', 'Total number of persistent connection, Default to 100', parseInt)
-  .option('-c, --concurency <n>', 'Concurent connection per second, Default to 20', parseInt)
+  .option('-c, --concurrency <n>', 'Concurrent connection per second, Default to 20', parseInt)
   .option('-w, --worker <n>', 'number of worker', parseInt)
   .option('-g, --generator <file>', 'js file for generate message or special event')
   .option('-m, --message <n>', 'number of message for a client. Default to 0', parseInt)
@@ -40,8 +40,8 @@ if (!program.amount) {
   program.amount = 100;
 }
 
-if (!program.concurency) {
-  program.concurency = 20;
+if (!program.concurrency) {
+  program.concurrency = 20;
 }
 
 if (!program.generator) {
@@ -64,7 +64,7 @@ if (program.type === 'primus' && !program.transport) {
   program.transPort = 'websockets';
 }
 
-logger.info('Launch bench with ' + program.amount + ' total connection, ' + program.concurency + ' concurent connection');
+logger.info('Launch bench with ' + program.amount + ' total connection, ' + program.concurrency + ' concurent connection');
 logger.info(program.message + ' message(s) send by client');
 logger.info(program.worker + ' worker(s)');
 logger.info('WS server : ' + program.type);
@@ -107,5 +107,5 @@ process.on('SIGINT', function () {
 
 });
 
-bench.launch(program.amount, program.concurency, program.worker, program.message, program.keepAlive);
+bench.launch(program.amount, program.concurrency, program.worker, program.message, program.keepAlive);
 
